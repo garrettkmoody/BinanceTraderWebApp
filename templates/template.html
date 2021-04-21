@@ -7,16 +7,29 @@
     <link rel="stylesheet" href="{{ url_for('static',    filename='css/template.css') }}">
     
 </head>
+<video playsinline autoplay muted loop  id="bgvid">
+  <source src="{{url_for('static', filename='videos/videoback.mp4')}}" type="video/mp4">
+</video>
   <body>
     <header>
-      <div class="container">
-        <h1 class="logo">First Web Applications</h1>
-        <strong><nav>
-          <ul class="menu">
-            <li><a href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('about') }}">About</a></li>
-          </ul>
-        </nav></strong>
+      <div class="container viewport-header">
+        <div class="inline">
+          <img src="{{url_for('static', filename='images/laser.png')}}" class="img" />
+        
+            <h1 class="logo maintitle">Moody Capital</h1>
+            <strong><nav class="nav menu viewport-header">
+              <ul>
+                  <li>
+                      <a href="#">Resources</a>
+                      <ul>
+                          <li><a href="#">View Price</a></li>
+                          <li><a href="#">About</a></li>
+                      </ul>
+                  </li>
+              </ul>
+          </nav></strong>
+         
+        </div>
       </div>
     </header>
     

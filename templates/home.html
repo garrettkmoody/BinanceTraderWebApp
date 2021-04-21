@@ -7,10 +7,11 @@
   <body>
     {% extends "template.html" %}
     {% block content %}
-    
-    <h1> My First Try Using Flask </h1>
-    <p> Flask is Fun </p>
-    
+    <div class="viewport-header">
+      <div class="center">
+        <h1 class="entercode"> Enter code here </h1>
+        <form action="{{ url_for('showPrice') }}" method="GET"><input type="text" name="code"></div></form>
+    </div>
     {% endblock %}
   </body>
 </html>
