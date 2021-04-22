@@ -1,7 +1,10 @@
 from flask import Flask, render_template, url_for, request, jsonify
-import os
+import os, io
 
 app = Flask(__name__)
+
+accountBalance = "5000"
+
 
 @app.route("/")
 def home():
@@ -10,7 +13,7 @@ def home():
 
 @app.route("/price", methods=['GET'])
 def showPrice():
-    return render_template("price.html")
+    return render_template("price.html", value=accountBalance)
 
 @app.route("/about")
 def about():
@@ -19,7 +22,8 @@ def about():
 @app.route("/price", methods=['POST'])
 def update():
     headers = request.headers
-    if request.method == 'POST' and headers.get("X-Api-Key") == 'gj353o4jsdfsfj4':
+    if request.method == 'POST' and doesUserExist(headers.get("X-Api-Key")):
+        
         return jsonify({"message": "OK: Authorized"}), 200
     else:
         return jsonify({"message": "ERROR: Unauthorized"}), 401
@@ -37,5 +41,17 @@ def dated_url_for(endpoint, **values):
             values['q'] = int(os.stat(file_path).st_mtime)
     return url_for(endpoint, **values)
 
+def doesUserExist(accountKey):
+    return True
+
+
+
 if __name__ == "__main__":
+    f = open("accountInfo.txt", "r")
+    Lines = f.readlines()
+    for line in Lines:
+        name, share = line.split()
+        print("Here is name: {}\n Here is share: {} ".format(name,share))
+
+    
     app.run(debug=True)

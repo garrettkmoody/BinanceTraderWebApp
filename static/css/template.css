@@ -43,6 +43,14 @@ input[type=text] {
     animation: doublefadeIn 4.5s linear forwards;
 }
 
+.background_card {
+    border-style: solid;
+    border-radius: 20px;
+    border-color: black;
+    background-color:rgba(8, 105, 233, 0.459);
+    font-family:monospace;
+}
+
 .menu {
     width: fit-content;
     margin-top: 23%;
