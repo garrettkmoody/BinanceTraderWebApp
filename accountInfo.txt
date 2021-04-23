@@ -1,4 +1,2 @@
-Garrett .8 4457625
-David .5 3373476
-Grant .3 998765
-Riley .1 442364
+Garrett .680492 112233
+Riley .319508 3422

@@ -3,17 +3,29 @@ import os, io
 
 app = Flask(__name__)
 
-accountBalance = "5000"
+accountBalance = "0"
+
+users = []
 
 
 @app.route("/")
 def home():
+    for i in users:
+        print(i)
     return render_template("home.html")
 
 
 @app.route("/price", methods=['GET'])
 def showPrice():
-    return render_template("price.html", value=accountBalance)
+    default_code = "0000"
+    data = request.form
+    print("we have: {} and {}".format(data, default_code))
+    print(data)
+    if doesUserExist(default_code):
+        return render_template("price.html", value=accountBalance)
+    else:
+        print("Enter Valid Code")
+        return "hey"
 
 @app.route("/about")
 def about():
@@ -22,7 +34,7 @@ def about():
 @app.route("/price", methods=['POST'])
 def update():
     headers = request.headers
-    if request.method == 'POST' and doesUserExist(headers.get("X-Api-Key")):
+    if request.method == 'POST' and headers.get("X-Api-Key") == "gthsefh983h94h":
         
         return jsonify({"message": "OK: Authorized"}), 200
     else:
@@ -42,16 +54,23 @@ def dated_url_for(endpoint, **values):
     return url_for(endpoint, **values)
 
 def doesUserExist(accountKey):
-    return True
+    for user in users:
+        if user[2] == accountKey:
+            return True
+    
+    return False
+
 
 
 
 if __name__ == "__main__":
     f = open("accountInfo.txt", "r")
     Lines = f.readlines()
+
     for line in Lines:
-        name, share = line.split()
-        print("Here is name: {}\n Here is share: {} ".format(name,share))
+        name, share, code = line.split()
+        users.append((name, share, code))
+        print("Here is name: {}\n Here is share: {} ,   {}".format(name,share, code))
 
     
     app.run(debug=True)
