@@ -20,9 +20,9 @@ def showPrice():
     data = request.form
     print(float([user[1] for user in users if user[2] == data['code']][0]) + 5)
     if doesUserExist(data['code']):
-        shareSize = float([user[1] for user in users if user[2] == data['code']][0])
+        shareSize = float([user[1] for user in users if user[2] == data['code']][0]) * float(accountBalance)
         return render_template("price.html", name=[user[0] for user in users if user[2] == data['code']],
-         shareSize=shareSize * accountBalance)
+         shareSize=shareSize)
     else:
         print("Enter Valid Code")
         return "hey"
