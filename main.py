@@ -3,7 +3,7 @@ import os, io
 
 app = Flask(__name__)
 
-accountBalance = "0"
+accountBalance = "3126"
 
 users = []
 
@@ -15,14 +15,14 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/price", methods=['GET'])
+@app.route("/price", methods=['POST'])
 def showPrice():
-    default_code = "0000"
     data = request.form
-    print("we have: {} and {}".format(data, default_code))
-    print(data)
-    if doesUserExist(default_code):
-        return render_template("price.html", value=accountBalance)
+    print(float([user[1] for user in users if user[2] == data['code']][0]) + 5)
+    if doesUserExist(data['code']):
+        shareSize = float([user[1] for user in users if user[2] == data['code']][0])
+        return render_template("price.html", name=[user[0] for user in users if user[2] == data['code']],
+         shareSize=shareSize * accountBalance)
     else:
         print("Enter Valid Code")
         return "hey"
