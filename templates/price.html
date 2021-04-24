@@ -9,10 +9,11 @@
     {% extends "template.html" %}
     {% block content %}
     <div class="viewport-header">
-      <h1 class="white center">Hello <span>{{ name.0 }}</span></h1>
+      
       <div class="center background_card">
-        <h1> Your portfolio worth : <span class="fancy">${{ shareSize }}</span> </h1>
-        <h1> Percentage Gain/Loss : <span class="fancy">{{ percentChange }}%</span> </h1>
+        <h1 class="cream fancy">Hello <span>{{ name.0 }}</span></h1>
+        <h1 class="cream"> Your portfolio worth : <span class="fancy">${{ shareSize }}</span> </h1>
+        <h1 class="cream"> Percentage Gain/Loss : <span class="fancy">{{ percentChange }}%</span> </h1>
     </div>
     {% endblock %}
   </body>
