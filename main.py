@@ -3,8 +3,8 @@ import os, io
 
 app = Flask(__name__)
 
-accountBalance = "3126"
-
+accountBalanceInitial = 3129.81
+incomingAccBal = 3500
 users = []
 
 
@@ -20,9 +20,10 @@ def showPrice():
     data = request.form
     print(float([user[1] for user in users if user[2] == data['code']][0]) + 5)
     if doesUserExist(data['code']):
-        shareSize = float([user[1] for user in users if user[2] == data['code']][0]) * float(accountBalance)
+        shareSize = round(float([user[1] for user in users if user[2] == data['code']][0]) * incomingAccBal, 2)
+        percentChange = round((incomingAccBal / accountBalanceInitial - 1) * 100.0,2)
         return render_template("price.html", name=[user[0] for user in users if user[2] == data['code']],
-         shareSize=shareSize)
+         shareSize=shareSize, percentChange=percentChange)
     else:
         print("Enter Valid Code")
         return "hey"
@@ -31,11 +32,13 @@ def showPrice():
 def about():
     return render_template("about.html")
 
-@app.route("/price", methods=['POST'])
+@app.route("/update", methods=['POST'])
 def update():
     headers = request.headers
-    if request.method == 'POST' and headers.get("X-Api-Key") == "gthsefh983h94h":
-        
+    global incomingAccBal
+    if request.method == 'POST' and headers.get("X-Api-Key") == "gj353o4jsdfsfj4":
+        incomingAccBal = request.json['newbal']
+        print(incomingAccBal)
         return jsonify({"message": "OK: Authorized"}), 200
     else:
         return jsonify({"message": "ERROR: Unauthorized"}), 401
