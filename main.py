@@ -18,7 +18,6 @@ def home():
 @app.route("/price", methods=['POST'])
 def showPrice():
     data = request.form
-    print(float([user[1] for user in users if user[2] == data['code']][0]) + 5)
     if doesUserExist(data['code']):
         shareSize = round(float([user[1] for user in users if user[2] == data['code']][0]) * incomingAccBal, 2)
         percentChange = round((incomingAccBal / accountBalanceInitial - 1) * 100.0,2)
@@ -26,7 +25,7 @@ def showPrice():
          shareSize=shareSize, percentChange=percentChange)
     else:
         print("Enter Valid Code")
-        return "hey"
+        return "Enter a Valid Code Please"
 
 @app.route("/about")
 def about():
