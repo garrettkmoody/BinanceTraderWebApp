@@ -3,9 +3,9 @@ import os, io
 
 app = Flask(__name__)
 
-accountBalanceInitial = 3129.81
-incomingAccBal = 3500
-users = [("Garrett", ".680492", "112233"), ("Ryley", ".319508", "3422")]
+accountBalanceInitial = 3629.81
+incomingAccBal = 3629.81
+users = [("Garrett", ".586769", "112233"), ("Ryley", ".4132309", "3422")]
 
 stringForGoogle = "Garrett .680492 112233\nRyley .319508 3422"
 
